@@ -1,0 +1,29 @@
+//recursion, ith row derives on (i-1)th row
+public class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> rst = new ArrayList<List<Integer>>(); 
+        if(numRows<3){ 
+            for(int i=1;i<=numRows;i++){
+                List<Integer> row = new ArrayList<Integer>();
+                for(int j=i;j>0;j--)
+                    row.add(1);
+                rst.add(row);
+            }
+        }
+        else{//numRows>=3
+            rst = generate(numRows-1);
+            List<Integer> row = new ArrayList<Integer>();
+            row.add(1);
+            List<Integer> pre = new ArrayList<Integer>();
+            pre = rst.get(rst.size()-1); 
+            for(int i=0; i<pre.size()-1;i++){
+                int item = pre.get(i)+pre.get(i+1);
+                row.add(item);
+            }
+            row.add(1);
+            rst.add(row);
+        }
+        return rst; 
+    }
+    
+}
