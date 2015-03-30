@@ -1,0 +1,86 @@
+// Arbitrary array: random order, duplicates
+
+public class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        if (numbers==null||numbers.length==0) 
+        return null; 
+        
+        // Sort first -> index changed 
+        // Arrays.sort(numbers);
+        // int start=0, end=numbers.length-1; 
+        // while(start<end){
+        //     int sml = numbers[start]; 
+        //     int big = numbers[end]; 
+        //     if(sml+big==target)
+        //         return new int[]{++start, ++end}; 
+        //     else if (sml+big<target){
+        //         start++; 
+        //         while (start<end&&numbers[start]==numbers[start-1]){
+        //             start++;
+        //         }
+        //     }else {
+        //         end--;    
+        //         while(start<end&&numbers[end]==numbers[end+1]){
+        //             end--;
+        //         }
+        //     }
+            
+        // }
+        // return null; 
+        
+        //Without sort -> time limit exceed (Naive approach)
+        // for(int i=0;i<numbers.length;i++){
+        //     for(int j=i+1;j<numbers.length;j++){
+        //         if(numbers[i]+numbers[j]==target)
+        //             return new int[]{i+1,j+1};
+        //     }
+        // }
+        // return null; 
+        
+        // Remember index and then sort -> will encounter duplicates
+        // HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); 
+        // for (int i=0; i<numbers.length;i++){
+        //     map 
+        // }
+        
+        // Arrays.sort(numbers);
+        // int start=0, end=numbers.length-1; 
+        // while(start<end){
+        //     int sml = numbers[start]; 
+        //     int big = numbers[end]; 
+        //     if(sml+big==target)
+        //         return new int[]{++start, ++end}; 
+        //     else if (sml+big<target){
+        //         start++; 
+        //         while (start<end&&numbers[start]==numbers[start-1]){
+        //             start++;
+        //         }
+        //     }else {
+        //         end--;    
+        //         while(start<end&&numbers[end]==numbers[end+1]){
+        //             end--;
+        //         }
+        //     }
+            
+        // }
+        // return null; 
+        
+        //HashMap without sort
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); 
+        for (int i=0; i<numbers.length;i++){
+            if(map.containsKey(numbers[i])){
+                int index = map.get(numbers[i]);
+                return new int[]{++index, ++i};
+                
+            }else {
+                map.put(target-numbers[i], i);
+            }
+        }
+        return null; 
+        
+        
+        
+        
+    }
+    
+}
