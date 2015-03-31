@@ -9,33 +9,47 @@
  *     }
  * }
  */
+ // Assumptions
+ // unknow # of digits
+ 
+ // Failures: 
+ // #1 ">10" or ">9"
+ // #2 forgot the last carry
+ // #3 if last carry 0, can't append it (okay think thoroughly before you do)
+ 
 public class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if(l1==null&&l2==null)return null; 
+        if (l1==null||l2==null) 
+        return null; 
         
+        int rst=0, carry=0; 
         ListNode head = new ListNode(0); 
-        ListNode point = head; 
-        int c= 0; 
+        ListNode dummy = head; 
         
-        
-        while(l1!=null&l2!=null){
-            int sum = l1.val+l2.val+c; 
-            c=sum/10; 
-            point.next=new ListNode(sum%10); //point better points a non-null node. Here, directly pointing a node with value is good. 
-            l1=l1.next; 
-            l2=l2.next;
-            point=point.next; 
+        //Create a new list (create new node one at a time)
+        while(l1!=null&&l2!=null){
+            int temp = l1.val + l2.val + carry; 
+            rst = (temp>9)? temp-10:temp;  
+            carry = (temp>9)? 1:0; 
+            ListNode result = new ListNode(rst); 
+            head.next = result;
+            head = result; 
+            l1 = l1.next; 
+            l2 = l2.next; 
         }
-        ListNode l = (l1==null)? l2:l1; 
-        while(l!=null){
-            int sum = l.val + c; 
-            c=sum/10; 
-            point.next=new ListNode(sum%10); 
-            l=l.next; 
-            point=point.next; 
+        ListNode l12 = (l1==null)? l2: l1; 
+        while(l12!=null){
+            int temp = l12.val + carry; 
+            rst = (temp>9)? temp-10:temp; 
+            carry = (temp>9)? 1:0; 
+            ListNode result = new ListNode(rst); 
+            head.next = result; 
+            head = result; 
+            l12 = l12.next; 
         }
-        if(c!=0) point.next = new ListNode(c); 
-        return head.next;
+        ListNode end = new ListNode(carry); 
+        head.next = (carry!=0)?end:null; 
+        return dummy.next; 
         
     }
 }
