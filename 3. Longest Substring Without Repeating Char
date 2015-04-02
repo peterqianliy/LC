@@ -1,0 +1,33 @@
+//Prob. data structure: string 
+//Sol. data structure: stack/queue/array. not hashset, need to know sequence
+
+//Failures: 
+//#1 parenthesis, need more attention
+//#2 return type, int cannot be null
+//#3 Queue is abstract; cannot be instantiated. Like "list", realized with ArrayList
+//#4 Wrong answer "asljlj", output 2, expected 4 (this is the one getting the wrong answer)
+
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s==null||s.isEmpty()) return 0; 
+        // initialization
+        Queue<Character> q = new LinkedList<Character>(); 
+        q.offer(s.charAt(0));
+        int len = q.size(); 
+
+        for (int i=1;i<s.length();i++){
+            char ch = s.charAt(i); 
+            if(!q.contains(ch)){
+                q.offer(ch);
+            }else{//q.contains(ch)
+                len = q.size();
+                while(!q.peek().equals(ch)){
+                    q.poll();
+                }
+                q.poll();
+                q.offer(ch);
+            }
+        }
+        return (len>q.size())? len:q.size();
+    }
+}
