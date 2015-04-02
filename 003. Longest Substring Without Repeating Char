@@ -20,7 +20,7 @@ public class Solution {
             if(!q.contains(ch)){
                 q.offer(ch);
             }else{//q.contains(ch)
-                len = q.size();
+                len = (len>q.size())? len:q.size();
                 while(!q.peek().equals(ch)){
                     q.poll();
                 }
