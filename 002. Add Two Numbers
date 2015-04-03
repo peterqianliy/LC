@@ -17,38 +17,40 @@
  // #2 forgot the last carry
  // #3 if last carry 0, can't append it (okay think thoroughly before you do)
  
+ // Review Failures: 
+ // #1 forgot "l1=l1.next", "l2=l2.next"..
+ 
+// review exercises
 public class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if (l1==null||l2==null) 
-        return null; 
+       // "eligibility check"
+       if(l1==null||l2==null) return null; 
         
-        int rst=0, carry=0; 
-        ListNode head = new ListNode(0); 
-        ListNode dummy = head; 
+        // initialization
+        ListNode dummy = new ListNode(0); 
+        ListNode head = dummy; 
+        int carry = 0; 
         
-        //Create a new list (create new node one at a time)
-        while(l1!=null&&l2!=null){
-            int temp = l1.val + l2.val + carry; 
-            rst = (temp>9)? temp-10:temp;  
-            carry = (temp>9)? 1:0; 
-            ListNode result = new ListNode(rst); 
-            head.next = result;
-            head = result; 
-            l1 = l1.next; 
-            l2 = l2.next; 
+        // go
+        while (l1!=null&&l2!=null){
+            int sum = l1.val + l2.val + carry; 
+            carry = (sum>9)? 1: 0; 
+            sum = (sum>9)? sum-10: sum; 
+            head.next = new ListNode(sum); 
+            head = head.next; 
+            l1=l1.next; 
+            l2=l2.next;
         }
-        ListNode l12 = (l1==null)? l2: l1; 
-        while(l12!=null){
-            int temp = l12.val + carry; 
-            rst = (temp>9)? temp-10:temp; 
-            carry = (temp>9)? 1:0; 
-            ListNode result = new ListNode(rst); 
-            head.next = result; 
-            head = result; 
-            l12 = l12.next; 
+        ListNode ll = (l1!=null)? l1 :l2; 
+        while(ll!=null){
+            int sum =  ll.val + carry; 
+            carry = (sum>9)? 1: 0; 
+            sum = (sum>9)? sum-10: sum; 
+            head.next= new ListNode(sum); 
+            head = head.next; 
+            ll=ll.next;
         }
-        ListNode end = new ListNode(carry); 
-        head.next = (carry!=0)?end:null; 
+        head.next =(carry!=0)? new ListNode(carry): null;
         return dummy.next; 
         
     }
