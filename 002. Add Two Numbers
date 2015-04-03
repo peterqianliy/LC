@@ -36,8 +36,11 @@ public class Solution {
             int sum = l1.val + l2.val + carry; 
             carry = (sum>9)? 1: 0; 
             sum = (sum>9)? sum-10: sum; 
-            head.next = new ListNode(sum); 
-            head = head.next; 
+            // head.next = new ListNode(sum); 
+            ListNode curr = new ListNode(sum);
+            // head = head.next; 
+            head.next = curr; 
+            head = head.next;
             l1=l1.next; 
             l2=l2.next;
         }
@@ -47,10 +50,13 @@ public class Solution {
             carry = (sum>9)? 1: 0; 
             sum = (sum>9)? sum-10: sum; 
             head.next= new ListNode(sum); 
+            ListNode curr = new ListNode(sum); 
+            head.next = curr; 
             head = head.next; 
             ll=ll.next;
         }
-        head.next =(carry!=0)? new ListNode(carry): null;
+        ListNode end = new ListNode(carry);
+        head.next =(carry!=0)? end: null;
         return dummy.next; 
         
     }
