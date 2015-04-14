@@ -9,25 +9,25 @@
 
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
-        if(s==null||s.isEmpty()) return 0; 
-        // initialization
-        Queue<Character> q = new LinkedList<Character>(); 
-        q.offer(s.charAt(0));
-        int len = q.size(); 
-
-        for (int i=1;i<s.length();i++){
-            char ch = s.charAt(i); 
-            if(!q.contains(ch)){
-                q.offer(ch);
-            }else{//q.contains(ch)
-                len = (len>q.size())? len:q.size();
-                while(!q.peek().equals(ch)){
-                    q.poll();
-                }
-                q.poll();
-                q.offer(ch);
-            }
-        }
-        return (len>q.size())? len:q.size();
+       if(s==null||s.isEmpty()) return 0; 
+       
+       Queue<Character> q = new LinkedList<Character>(); 
+      
+       int len = 0; 
+       
+       for(int i=0; i<s.length(); i++){
+           char ch = s.charAt(i); 
+           if(q.contains(ch)){
+               len = (len>q.size())? len:q.size(); 
+               while(q.peek() != ch){
+                   q.poll();
+               }
+               q.poll(); 
+               q.offer(ch);
+           }else{
+               q.offer(ch);
+           }
+       }
+       return (len>q.size())?len:q.size();
     }
 }
