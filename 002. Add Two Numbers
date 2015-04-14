@@ -19,45 +19,42 @@
  
  // Review Failures: 
  // #1 forgot "l1=l1.next", "l2=l2.next"..
+ // #2 temp not initialized: you should know the lifecylcle of a variable 
  
-// review exercises
+// review exercise
 public class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-       // "eligibility check"
-       if(l1==null||l2==null) return null; 
         
-        // initialization
-        ListNode dummy = new ListNode(0); 
+        ListNode dummy = new ListNode(0);
         ListNode head = dummy; 
         int carry = 0; 
         
-        // go
-        while (l1!=null&&l2!=null){
+        while (l1!=null && l2!=null){
             int sum = l1.val + l2.val + carry; 
             carry = (sum>9)? 1: 0; 
-            sum = (sum>9)? sum-10: sum; 
-            // head.next = new ListNode(sum); 
-            ListNode curr = new ListNode(sum);
-            // head = head.next; 
-            head.next = curr; 
-            head = head.next;
-            l1=l1.next; 
-            l2=l2.next;
-        }
-        ListNode ll = (l1!=null)? l1 :l2; 
-        while(ll!=null){
-            int sum =  ll.val + carry; 
-            carry = (sum>9)? 1: 0; 
-            sum = (sum>9)? sum-10: sum; 
-            head.next= new ListNode(sum); 
-            ListNode curr = new ListNode(sum); 
-            head.next = curr; 
+            sum = (sum>9)? sum-10 : sum; 
+            ListNode temp = new ListNode(sum); 
+            head.next = temp; 
             head = head.next; 
-            ll=ll.next;
+            l1 = l1.next; 
+            l2 = l2.next;
         }
-        ListNode end = new ListNode(carry);
-        head.next =(carry!=0)? end: null;
+        ListNode ll = (l1 != null)? l1:l2; 
+        while (ll != null){
+            int sum = ll.val + carry;
+            carry = (sum>9)? 1: 0; 
+            sum = (sum>9)? sum-10 : sum; 
+            ListNode temp = new ListNode(sum); 
+            head.next = temp; 
+            head = head.next; 
+            ll = ll.next;
+        }    
+        if (carry == 1){
+            ListNode temp = new ListNode (carry); 
+            head.next = temp; 
+        }
         return dummy.next; 
+        
         
     }
 }
