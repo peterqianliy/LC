@@ -39,15 +39,15 @@ public class Solution {
             l1 = l1.next; 
             l2 = l2.next;
         }
-        ListNode ll = (l1 != null)? l1:l2; 
-        while (ll != null){
-            int sum = ll.val + carry;
+        l1 = (l1 != null)? l1:l2; 
+        while (l1 != null){
+            int sum = l1.val + carry;
             carry = (sum>9)? 1: 0; 
             sum = (sum>9)? sum-10 : sum; 
             ListNode temp = new ListNode(sum); 
             head.next = temp; 
             head = head.next; 
-            ll = ll.next;
+            l1 = l1.next;
         }    
         if (carry == 1){
             ListNode temp = new ListNode (carry); 
