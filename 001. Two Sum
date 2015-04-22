@@ -70,7 +70,7 @@ public class Solution {
         for (int i=0; i<numbers.length;i++){
             if(map.containsKey(numbers[i])){
                 int index = map.get(numbers[i]);
-                return new int[]{++index, ++i};
+                return new int[]{++index, ++i};// "++i" faster than "i+1"
                 
             }else {
                 map.put(target-numbers[i], i);
