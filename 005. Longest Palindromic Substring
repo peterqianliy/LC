@@ -12,63 +12,31 @@ public class Solution {
         if (s==null || s.isEmpty()) {
             return null;
         }
-    // Brute Force Approach 
-    // Just a hint: 
-    // Obtain all the substrings and check if it's a palindrome and update the longest
-  
-    // DYNAMIC PROGRAMMING O(n^2) time and O(n^2) space ---- A LITTLE TOO SLOW, behind most of JAVA
-    // Avoid duplicate "check", if "aba" is palin then so is "cabac"
-    // Array initialization !!
+    
         // int n = s.length();
-        int start = 0; 
-        int maxLen = 1; 
-        // declare an array
-        boolean[][] table;
-        // initialize an array
-        table = new boolean[1000][1000];
-        // populate base case
+        String maxString = s.substring(0,1);
         
-        // One-letter case: iterate through input string once, 
-        // then iterate through input string twice => Time Limit Exceeded
-        // for (int i=0; i<s.length()-1;i++){
-        //     if (s.charAt(i)==s.charAt(i+1)){
-        //         // s.charAt(i) is a char, a primitive type, cannot use ".charAt(•)"
-        //         table[i][i+1] = true; 
-        //         maxLen = 2; 
-        //         start = i;
-        //     }
-        // }
-        
-        // One-letter and two-letter cases, only iterating through input once
-        for (int i=0; i<s.length()-1;i++){
-            if (s.charAt(i)==s.charAt(i+1)){
-                // s.charAt(i) is a char, a primitive type, cannot use ".charAt(•)"
-                table[i][i+1] = true; 
-                maxLen = 2; 
-                start = i;
+        for (int i=0; i<s.length();i++){
+            // you can't return two indices after each 
+            String palString = ""; 
+            palString = findPalOnPivot(s, i, i);
+            if (palString.length()>maxString.length()){
+                maxString = palString;
             }
-            table[i][i] = true;
-        }
-        table[s.length()-1][s.length()-1] = true;
-
-        // P[i,j] iff (s[i]==s[j]) && (P[i+1,j-1])
-        // and j should be 2~s.length()-1 
-        // The cases where j=0 and j=1 have been handled above
-        for (int len=2; len<s.length(); len++){
-            for (int i=0; i<s.length()-len;i++){
-                int j = i+len;
-                if (s.charAt(i)==s.charAt(j) && table[i+1][j-1]){
-                    // s.charAt(i) cannot use ".equals()"
-                    table[i][j] = true;
-                    maxLen = len + 1; 
-                    start = i;
-                }
+            palString = findPalOnPivot(s, i, i+1);
+            if (palString.length()>maxString.length()){
+                maxString = palString;
             }
         }
-        return s.substring(start, start+maxLen);
+        return maxString;
+    }
     
-    
-        // MANACHER'S ALGORITHM (To be cont.)
-            
-    }       
+    public String findPalOnPivot(String s, int l, int r){
+        int n = s.length(); // whats s?? Should be the original input
+        while (l>=0 && r<=n-1 && s.charAt(l)==s.charAt(r)){
+            --l;
+            ++r;
+        }
+        return s.substring(++l, r);
+    }
 }
