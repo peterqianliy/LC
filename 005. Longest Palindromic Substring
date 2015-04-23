@@ -16,7 +16,7 @@ public class Solution {
     // Just a hint: 
     // Obtain all the substrings and check if it's a palindrome and update the longest
   
-    // DYNAMIC PROGRAMMING O(n^2) time and O(n^2) space
+    // DYNAMIC PROGRAMMING O(n^2) time and O(n^2) space ---- A LITTLE TOO SLOW, behind most of JAVA
     // Avoid duplicate "check", if "aba" is palin then so is "cabac"
     // Array initialization !!
         // int n = s.length();
