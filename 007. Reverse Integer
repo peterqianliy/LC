@@ -1,0 +1,25 @@
+// 1. Initial Thoughts
+//    “int" problem, you consider "0"
+//    "int" problem, you also consider overflow (numbers) -- Handle overflow: somehow compare with Integer.MAX_VALUE --> No, use "long" instead of "int" to handle the result
+
+// 2. Reference from jiuzhang.com
+//    Oh, don't need additional structures -- so MATH problom does not need DS???
+
+// 3. Failures: 
+//    #1 overflow -> USE DATA TYPE "long"
+//    #2 (CASTING) long into int conversion ->  for PRIMITIVE type(byte, short, int, long, char, float, double..)
+//        for reference: see xahlee.info/java-a-day/casting.html
+//        for testing results: can cast each one to one another but possible loss may occur
+
+public class Solution {
+  public int reverse(int x) {
+    long rst = 0; 
+    int res = x;
+    while (res != 0){
+      // Reversing the int
+      rst = rst*10 + res%10; 
+      res /= 10;
+    }
+    return (rst>Integer.MAX_VALUE) || (rst<Integer.MIN_VALUE) ? 0: (int)rst;
+  }
+}
