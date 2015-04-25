@@ -1,0 +1,29 @@
+// 1. Initial Thought: 
+//   brute force: backtracking, every two vertical lines and maintan an array of two vertical lines
+//  2. Reference from niuzhang.com  
+//   See, initially, the max area is form by leftmost ant rightmost bars
+//   So, start to iterate from there 
+public class Solution {
+    public int maxArea(int[] height) {
+        if (height == null || height.length == 0){
+            return 0;
+        }
+        
+        int l = 0; 
+        int r = height.length-1;
+        int minBar = (height[r]>height[l])? height[l]: height[r];
+        int area = minBar * (r-l);
+        int max = area;
+        while (l < r){
+            minBar = (height[r]>height[l])? height[l]: height[r];
+            area = minBar * (r-l);
+            max = (max>area)? max: area;
+            if (height[r]>height[l]){
+                ++l;
+            }else{
+                --r;
+            }
+        }
+        return max;
+    }
+}
