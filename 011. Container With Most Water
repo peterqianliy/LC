@@ -1,5 +1,5 @@
 // 1. Initial Thought: 
-//   brute force: backtracking, every two vertical lines and maintan an array of two vertical lines
+//   brute force: backtracking, every two vertical lines and maintan an array of two vertical lines; But two for-loop are too expensive; need to find out a way to ITERATE
 //  2. Reference from niuzhang.com  
 //   See, initially, the max area is form by leftmost ant rightmost bars
 //   So, start to iterate from there 
