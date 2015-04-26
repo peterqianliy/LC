@@ -1,0 +1,25 @@
+// 1. Initial Thought: brute force O(n^2)
+//      the next question: how do you iterate through this       
+// 2. Other notes: For array, string, char, when they are together, I may get confused by indices.
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0) {
+            return "";    
+        }else if (strs.length==1){
+            return strs[0];
+        }
+        
+        String row1 = strs[0];
+        int arrLen = strs.length; 
+        for (int i=0; i<row1.length(); i++){
+            char row1ch = row1.charAt (i);
+            
+            for (int j=0; j<arrLen; j++){
+                if (strs[j].length()<i+1 || strs[j].charAt(i)!=row1.charAt(i) ) {
+                        return strs[j].substring(0, i);
+                }
+            }
+        }
+        return strs[0];
+    }
+}
