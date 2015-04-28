@@ -3,10 +3,11 @@
 // 2. Other notes: For array, string, char, when they are together, I may get confused by indices.
 public class Solution {
     public String longestCommonPrefix(String[] strs) {
-        if (strs.length == 0) {
+        if (strs == null) {
+        // NOTE: for empty strings, use care when you return a "null" value
+            return null; 
+        }else if (strs.length == 0) {
             return "";    
-        }else if (strs.length==1){
-            return strs[0];
         }
         
         String row1 = strs[0];
