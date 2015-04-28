@@ -26,15 +26,27 @@ public class Solution {
             int start = i + 1; 
             int end = nums.length - 1;
             while (start < end){
-                int er = target - (nums[i] + nums[start] + nums[end]) ; 
-                error = (Math.abs(error) < Math.abs(er))? error: er; 
-                if (er == 0){
+                int err = target - (nums[i] + nums[start] + nums[end]) ; 
+                if (err == 0){
                     return target;
-                }else if (er > 0){
-                    ++start; 
-                }else {
-                    --end;
+                }else if (err < 0){
+                    int er = target - nums[i] - nums[start] - nums[start+1];
+                    if (er < 0){
+                        error = (Math.abs(error) < Math.abs(er))? error: er;
+                        break;
+                    }else {
+                         --end;  
+                    }
+                }else if (err > 0){
+                    int er = target - nums[i] - nums[end] - nums[end-1];
+                    if (er > 0){
+                        error = (Math.abs(error) < Math.abs(er))? error: er;
+                        break;
+                    }else {
+                        ++start; 
+                    }
                 }
+                error = (Math.abs(error) < Math.abs(err))? error: err; 
             }
         }
         return (target - error);
