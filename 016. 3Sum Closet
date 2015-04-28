@@ -1,0 +1,42 @@
+// 1. Initail Thought: 
+//  sort, iterate and then for every other two from the the rest use "2-sum" like method ====> not really, this is CLOSET, not the target
+// 2. Reference from Discussion
+// sort, three-pointer interation, maintain a variable for the difference
+// 3. Failures: 
+//      #1 "nums==null || nums.length=0"
+//      #2 "nums.lengtnh<=3"
+//      #3 "Array.sort" --> Arrays.sort 
+//      #4 undefined variable
+//      #5 ATTENTION: where do you UPDATE er ---> er relates to i, start, end (three pointers); changes of any one of these would cause er to change
+public class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        if (nums==null || nums.length==0){
+            return 0; // or "-1"
+        }else if (nums.length<=3){
+            int sum = 0; 
+            for (int i=0; i<nums.length; i++){
+                sum += nums[i];
+            }
+            return sum;
+        }
+        
+        Arrays.sort(nums);
+        int error = Integer.MAX_VALUE; 
+        for (int i=0; i<nums.length; i++){
+            int start = i + 1; 
+            int end = nums.length - 1;
+            while (start < end){
+                int er = target - (nums[i] + nums[start] + nums[end]) ; 
+                error = (Math.abs(error) < Math.abs(er))? error: er; 
+                if (er == 0){
+                    return target;
+                }else if (er > 0){
+                    ++start; 
+                }else {
+                    --end;
+                }
+            }
+        }
+        return (target - error);
+    }
+}
