@@ -1,0 +1,29 @@
+// 1. Initial Thought: pairing via HashMap, but it is not just for checking existence..
+//      second thought: array of boolean 
+//      understanding of the problem went wrong
+// 2. Reference from discussion: use previously 
+//      Data Structure: stack 
+
+public class Solution {
+    public boolean isValid(String s) {
+        if (s==null || s.isEmpty()){
+            return false; 
+        }
+        
+        Stack<Character> stk = new Stack<Character> (); 
+        for (int i=0; i<s.length(); i++){
+            char ch = s.charAt (i);
+            if (ch=='(' || ch=='{' || ch=='['){
+                stk.push (ch); 
+            }else if ((!stk.empty()) && (ch==')' || ch=='}' || ch==']')){
+                char prev = stk.pop (); 
+                if (!((ch==')'&&prev=='(')||(ch=='}'&&prev=='{')||(ch==']'&&prev=='['))){
+                    return false; 
+                }
+            }else {
+                return false;
+            }
+        }
+        return stk.empty();
+    }
+}
