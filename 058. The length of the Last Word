@@ -1,0 +1,25 @@
+// Initial Thought 
+
+public class Solution {
+    public int lengthOfLastWord(String s) {
+        if (s==null){
+            return 0;
+        }else if (s.isEmpty()){
+            return 0; 
+        }
+        
+        int sum = 0 ;
+        boolean metAlphebatic = false;
+        for (int i=s.length()-1; i>=0; --i){
+           if (s.charAt(i)!=' '){
+               ++sum; 
+               metAlphebatic = true;
+           }else {
+               if (metAlphebatic){
+                   return sum;
+               }
+           }
+        }
+        return sum ;
+    }
+}
