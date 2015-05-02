@@ -1,0 +1,60 @@
+// 1. Initial Thought: binary adder 
+// 2. Failures: 
+//      #1. Time limit exceed: forgot to DECREMENT after each loop ----> infinite loop
+
+public class Solution {
+    public String addBinary(String a, String b) {
+        if (a==null || b==null){
+            return null;
+        }else if (a.isEmpty()){
+            return b;
+        }else if (b.isEmpty()){
+            return a; 
+        }
+        
+       String rst = "";
+       int carry = 0; 
+       int sum = 0; 
+       int a_digi = 0; 
+       int b_digi = 0; 
+       int a_idx = a.length() - 1;
+       int b_idx = b.length() - 1; 
+       int binary = 2; 
+       while (a_idx >= 0 && b_idx >= 0){
+           char a_ch = a.charAt (a_idx); 
+           char b_ch = b.charAt (b_idx);
+           a_digi = a_ch - '0'; 
+           b_digi = b_ch - '0'; 
+           sum = a_digi + b_digi + carry;
+           carry = (sum >= binary)? 1: 0; 
+           sum = (sum >= binary)? sum-binary: sum; 
+           rst = Integer.toString (sum) + rst;
+           --a_idx; 
+           --b_idx; 
+       }
+       while (a_idx >= 0){
+           char a_ch = a.charAt (a_idx); 
+           a_digi = a_ch - '0'; 
+           sum = a_digi + carry;
+           carry = (sum >= binary)? 1: 0; 
+           sum = (sum >= binary)? sum-binary: sum; 
+           rst = Integer.toString (sum) + rst;
+           --a_idx; 
+           --b_idx; 
+       }
+       while (b_idx >= 0){
+           char b_ch = b.charAt (b_idx);
+           b_digi = b_ch - '0'; 
+           sum = b_digi + carry;
+           carry = (sum >= binary)? 1: 0; 
+           sum = (sum >= binary)? sum-binary: sum; 
+           rst = Integer.toString (sum) + rst;
+           --a_idx; 
+           --b_idx; 
+       }
+       if (carry != 0){
+           rst = Integer.toString (carry) + rst; 
+       }
+       return rst; 
+    }
+}
