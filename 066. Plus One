@@ -1,0 +1,30 @@
+// 2. Failures: 
+//      #1. Wrong answer: [0] --> [0], [1] expected, forgot to UPDATE CELL VALUE
+public class Solution {
+    public int[] plusOne(int[] digits) {
+        if (digits == null || digits.length == 0){
+            return new int[]{}; 
+        }
+        
+        int carry = 1; 
+        int sum = 0; 
+        int idx = digits.length - 1; 
+        do {
+            sum = digits[idx] + carry; 
+            carry = (sum >= 10)? 1: 0; 
+            sum = (sum >= 10)? sum-10: sum; 
+            digits[idx] = sum; 
+            --idx; 
+        }while (carry != 0 && idx >=0);
+        
+        if (carry == 1 && idx < 0){
+            int[] rst = new int[digits.length+1];
+            rst[0] = carry; 
+            for (int i = 1; i<rst.length; i++){
+                rst[i] = digits[i-1];
+            }
+            return rst; 
+        }
+        return digits;
+    }
+}
