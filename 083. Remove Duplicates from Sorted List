@@ -15,21 +15,17 @@
  *  }
  * 
  */
+ 
+// 2. Reference from Dicussion: new idea about iteration in a LinkedList
+
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if (head  == null){
-            return head;
+            return null;
         }
-        
-        ListNode dummy = new ListNode (0); 
-        dummy.next = head; 
-        while (head.next != null){
-            if (head.val == head.next.val){
-                head.next = head.next.next; 
-                continue;
-            }
-            head = head.next; 
+        for (ListNode ptr = head; ptr != null; ptr = ptr.next){
+            for (; ptr.next!=null && ptr.val==ptr.next.val; ptr.next=ptr.next.next){ }
         }
-        return dummy.next; 
+        return head; 
     }
 }
