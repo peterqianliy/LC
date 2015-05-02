@@ -1,0 +1,23 @@
+// Failures:
+//      #1 recursive: time limit exceeded.. -->> iterative, bottom-up: 1) base case, 2) figure out EVERY step 
+
+public class Solution {
+    public int climbStairs(int n) {
+        if (n <= 0){
+            return 0; 
+        }else if (n == 1){
+            return 1; 
+        }else if (n == 2){
+            return 2;
+        }
+        
+        int[] M = new int[n+1];
+        M[0] = 0; 
+        M[1] = 1; 
+        M[2] = 2; 
+        for (int i=3; i<n+1; i++){
+            M[i] = M[i-2] + M[i-1]; 
+        }
+        return M[n];
+    }
+}
