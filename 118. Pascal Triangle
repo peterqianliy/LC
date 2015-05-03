@@ -1,31 +1,41 @@
 // 1. Initial Thought: 
 //      To populate an array, an ArrayList, according to some RULES 
-
+// 2. Failures: I think mine was too slow, but after adding more handling of SPECIAL CASEs, much better 
 
 public class Solution {
     public ArrayList<ArrayList<Integer>> generate(int numRows) {
        ArrayList<ArrayList<Integer>> rst = new ArrayList<ArrayList<Integer>> ();
-       
-       if (numRows == 0){
-            return rst;             
+       ArrayList<Integer> level = new ArrayList<Integer> (); 
+        if (numRows <= 2){
+           for (int i=0; i<numRows; i++){
+               level = new ArrayList<Integer> (); 
+               for (int j=0; j<=i; j++){
+                   level.add (1);
+               }
+               rst.add(level); 
+           }
+           return rst; 
        }
        
-       // iterate through n rows
-       for (int i=0; i<numRows; i++){
-           // ArrayList set method 
-           ArrayList<Integer> level = new ArrayList<Integer> (); 
-           level.add (1); 
-           // iterate through i "columns"
-           for (int j=0; j<i-1; j++){
-               // retrieve elements from 2D ArrayList
-               int member = rst.get(i-1).get(j) + rst.get(i-1).get(j+1); 
-               level.add (member); 
+        // iterate through n rows
+        for (int i=0; i<numRows; i++){
+            level = new ArrayList<Integer> (); 
+            level.add (1);    
+            // EXCEPTIONS in a loop 
+            if (i == 0){
+                rst.add (level); 
+                continue; 
             }
-            if (i!=0){
-           level.add (1);
+        
+            // for each row 
+            for (int j=1; j<i; j++){
+                // retrieve elements from 2D ArrayList
+                int member = rst.get(i-1).get(j-1) + rst.get(i-1).get(j); 
+                level.add (member); 
             }
-           rst.add (level);
-       }
-       return rst; 
+        level.add (1);
+        rst.add (level);
+        }
+        return rst; 
     }
 }
