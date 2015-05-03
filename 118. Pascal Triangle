@@ -1,0 +1,31 @@
+// 1. Initial Thought: 
+//      To populate an array, an ArrayList, according to some RULES 
+
+
+public class Solution {
+    public ArrayList<ArrayList<Integer>> generate(int numRows) {
+       ArrayList<ArrayList<Integer>> rst = new ArrayList<ArrayList<Integer>> ();
+       
+       if (numRows == 0){
+            return rst;             
+       }
+       
+       // iterate through n rows
+       for (int i=0; i<numRows; i++){
+           // ArrayList set method 
+           ArrayList<Integer> level = new ArrayList<Integer> (); 
+           level.add (1); 
+           // iterate through i "columns"
+           for (int j=0; j<i-1; j++){
+               // retrieve elements from 2D ArrayList
+               int member = rst.get(i-1).get(j) + rst.get(i-1).get(j+1); 
+               level.add (member); 
+            }
+            if (i!=0){
+           level.add (1);
+            }
+           rst.add (level);
+       }
+       return rst; 
+    }
+}
