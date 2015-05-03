@@ -1,0 +1,38 @@
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ * 
+ * 1. Initial Thought: something DFS??
+ *      Attempted to use BFS, level order traversal, which I know ---> time limit exceed
+ * 2. Reference: 
+ *      NOTE: recursion here, so EASY
+ * 3. Failures: 
+ *      #1 misunderstading of the binary tree: leaf node is the one without any child nodes. 
+ *      #2 Time limit exceed -> can not BFS
+ */
+public class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null){
+            return 0; 
+        }else if (root.left==null && root.right==null){
+            return 1;
+        }
+        
+        int left = minDepth (root.left) ; 
+        int right = minDepth (root.right) ;
+        if (root.left==null || root.right==null){
+            return 1+Math.max(left, right); 
+        }else {
+            return 1+Math.min(left, right);
+        }
+        
+        
+        
+    }
+}
