@@ -1,0 +1,53 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ * 
+ * 1. Initial Thought: use a queue; BFS
+ *      There must be iteration and recursion ;
+ *      There must be some mechnism to record its level
+ *      Okay, try naive method first;
+ * 
+ * 2. Reference from Discussion: 
+ *      Check how to traverse a tree
+ * 3. Failures: 
+ *      #1 Queue is an interface .. 
+ *      #2 wrong answer: For ArrayList, ListNode, TreeNode..., returning "null" ..wrong..Rather, return an new empty ArrayList..
+ */
+ 
+
+public class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+       List<List<Integer>> rst = new ArrayList<List<Integer>>(); 
+       if (root == null){
+           return rst;
+       }
+       
+       Queue<TreeNode> q = new LinkedList<TreeNode> (); 
+       q.offer (root);
+       while (!q.isEmpty()){
+           // New list for every new level
+           List<Integer> level = new ArrayList<Integer> (); 
+           int num = q.size(); 
+           // Iterate through each level
+           for (int i=0; i<num; i++){
+               TreeNode tn = q.poll (); 
+               level.add (tn.val); 
+               if (tn.left != null){
+                   q.offer (tn.left); 
+               }
+               if (tn.right != null){
+                   q.offer (tn.right);
+               }
+           }
+           // Add each level
+           rst.add (level);
+       }
+       return rst; 
+       
+    }
+}
