@@ -1,0 +1,35 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+// 1. Initial questions: 
+//      #1. what means that "ListNode1 == ListNode2"?
+// 2. Failures: 
+//      #1. initialization not good. (fast=head; slow=head; if (fast==slow)return true...)
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if (head == null){
+            return false; 
+        }
+        
+        ListNode fast = head.next; 
+        ListNode slow = head; 
+        while (fast!=null && fast.next!=null && slow!=null && slow.next!=null){
+            if (fast == slow){
+                return true;
+            }
+            fast = fast.next.next; 
+            slow = slow.next; 
+        }
+        return false;
+        
+        
+    }
+}
