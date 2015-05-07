@@ -5,32 +5,6 @@
 //      #2. return types not compatible: please note the return types. 
 //      #3. typos..
 //      #4. index out of bound: k larger than nums.length
-public class Solution {
-    public void rotate(int[] nums, int k) {
-        if (nums==null || nums.length==0 ){
-            return ; 
-        }else if (k == 0){
-            return ;
-        }
-        
-        if (k > nums.length){
-            k = k%nums.length ;
-        }
-        
-        Queue<Integer> q = new LinkedList<Integer> (); 
-        int idx = nums.length - k; 
-        while (idx < nums.length){
-            q.offer (nums[idx++]);
-        }
-        idx = 0; 
-        while (idx < nums.length-k){
-            q.offer // 1. Initial Thoughts: Re-ORDERING --> Stack or Queue
-//      #1. Array only hold primitive value???
-// 2. Failures: 
-//      #1. identifier expected --- "You cannot call a method outside a method"
-//      #2. return types not compatible: please note the return types. 
-//      #3. typos..
-//      #4. index out of bound: k larger than nums.length
 //      #5. (reversal method) NOTE, input argument for "reverse", nums, is a reference. Passing reference 
 // 3. References:
 //      #1. three-times reverse 
@@ -44,6 +18,7 @@ public void rotate(int[] nums, int k) {
     k = k%nums.length; 
     reverse(nums, 0, nums.length - 1);
     reverse(nums, 0, k - 1);
+    // NOTE: "reverse (nums, k, nums.length-1)" instead of "reverse (nums, k-1, nums.length-1);
     reverse(nums, k, nums.length - 1);
 }
 
@@ -55,13 +30,5 @@ private void reverse(int[] nums, int start, int end) {
         start++;
         end--;
     }
-    }
-}(nums[idx++]);
-        }
-        for (int i=0; i<nums.length; i++){
-            nums[i] = q.poll ().intValue(); 
-        }
-        
-        
     }
 }
