@@ -1,0 +1,51 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+// 1. Initial questions: 
+//      #1. what's the node where the cycle begins?? -- Cycle not necessarily a whole big cycle, possily a partial small one. 
+// 2. Reference from Discussion
+//      #1. use a counter
+//      #2. use a HashMap/HashSet 
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        if (head == null){
+            return head;
+        }
+        
+        ListNode dummy = new ListNode (0);
+        dummy.next = head; 
+        ListNode fast = dummy.next.next;
+        ListNode slow = dummy.next; 
+        int counter = 1; 
+        while (fast!=null && fast.next!=null && slow!=null){
+            if (fast == slow){
+                break; 
+            }
+            
+            fast = fast.next.next; 
+            slow = slow.next;
+            ++counter; 
+        }
+        fast = dummy; 
+        slow = dummy; 
+        for (int i=counter; i>0; i--){
+            fast = fast.next; 
+        }
+        while (fast!=null && slow!=null){
+            if (fast == slow){
+                return fast;
+            }
+            fast = fast.next; 
+            slow = slow.next; 
+        }
+        return null; 
+    }
+}
