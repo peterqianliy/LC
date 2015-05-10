@@ -1,0 +1,30 @@
+// 1. Initial Thought: just remember the previous row
+// 2. Failures: 
+//      #1. # of rows != rowIndex!
+//      #2. You can not return at "i==0"
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> row = new ArrayList<Integer> ();
+        List<Integer> prev = row; 
+        if (rowIndex < 0){
+            return row; 
+        }else {
+            for (int i=0; i<=rowIndex; i++){
+                row = new ArrayList<Integer> (); 
+                row.add (1); 
+                if (i == 0){
+                    prev = row; 
+                    continue;
+                }
+            
+                for (int j=1; j<i; j++){
+                    row.add (prev.get(j-1) + prev.get(j));
+                }
+                row.add (1);
+                prev = row;
+            
+            }
+        }
+        return row;
+    }
+}
