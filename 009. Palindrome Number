@@ -1,0 +1,20 @@
+// 1. Initial: 
+//  #1. get the least significant and most significant numbers, iterate from the two sides. 
+//  #2. second thought: math problem has to have a Math solution..not just iterating through the numbers
+// 2. Reference: 
+//    Just REVERSE the integer1!!
+public class Solution {
+    public boolean isPalindrome(int x) {
+        int target = x; 
+        if (x < 0){
+            target = Math.abs (x);
+        }
+        
+        int reverse = 0; 
+        while (target > 0){
+            reverse = reverse*10 + target%10;
+            target /= 10;
+        }
+        return (reverse == x);
+    }
+}
