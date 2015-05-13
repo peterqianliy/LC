@@ -9,7 +9,7 @@
  */
  
 // 2. Reference: 
-//      #1. Iterative method: Tree: level order traversal. First traverse? and then return the last element of each level
+//      #1. Tree: level order traversal. First traverse? and then return the last element of each level
 // 3. Failures: 
 //      #1. Return type: list, don't return null, return an empty list
 public class Solution {
@@ -39,8 +39,8 @@ public class Solution {
             all.add(level);
         }   
         
-        for (int i=0; i<rst.size(); i++){
-            level = rst.get(i); 
+        for (int i=0; i<all.size(); i++){
+            level = all.get(i); 
             rst.add (level.get(level.size()-1));   
         }
         return rst;
