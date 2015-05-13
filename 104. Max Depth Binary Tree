@@ -1,0 +1,26 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+// 1. Initial: something recursive. What is the routine pattern for the recursion, DFS. 
+// 2. Reference from discussion: 
+//      #1. tree recursion, someMethod(root) = someMethod(left) "+" someMethod(right)
+//      #2. recursion: check status in the beginning and  keep calling the same method 
+public class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null){
+            return 0;
+        }
+        
+        int leftMaxDepth = maxDepth(root.left); 
+        int rightMaxDepth = maxDepth(root.right);
+        return (leftMaxDepth > rightMaxDepth)? leftMaxDepth+1: rightMaxDepth+1;
+        
+    }
+}
