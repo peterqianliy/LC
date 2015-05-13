@@ -1,0 +1,48 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+// 2. Reference: 
+//      #1. Iterative method: Tree: level order traversal. First traverse? and then return the last element of each level
+// 3. Failures: 
+//      #1. Return type: list, don't return null, return an empty list
+public class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<List<Integer>> all = new ArrayList<List<Integer>> (); 
+        List<Integer> level; 
+        List<Integer> rst = new ArrayList<Integer> ();
+        Queue<TreeNode> q = new LinkedList<TreeNode> (); 
+        if (root == null){
+            return new ArrayList<Integer> ();
+        }
+        
+        q.offer (root); 
+        while (q.size()!=0){
+            int num = q.size();
+            level = new ArrayList<Integer> ();
+            for (int i=0; i<num; i++){
+                TreeNode tn = q.poll ();
+                level.add (tn.val);
+                if (tn.left != null){
+                    q.offer (tn.left);
+                }
+                if (tn.right != null){
+                    q.offer (tn.right);
+                }
+            }
+            all.add(level);
+        }   
+        
+        for (int i=0; i<rst.size(); i++){
+            level = rst.get(i); 
+            rst.add (level.get(level.size()-1));   
+        }
+        return rst;
+    }
+}
