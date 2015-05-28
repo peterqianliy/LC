@@ -1,0 +1,36 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+ 
+// 1. Failure: consecutive values to be deleted
+// 2. Remember: 
+//  #1. kill duplicates: find next item that is not the targeted value (possible consecutive duplicates)
+//  #2. possibly, first element to be killed 
+public class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        if (head == null){
+            return head;
+        }
+        
+        ListNode dummy = new ListNode (0);
+        dummy.next = head;
+        ListNode ptr = dummy;
+        while (ptr.next!=null){
+            if (ptr.next.val!=val){
+                ptr=ptr.next;
+                continue;
+            }
+            ListNode ptr2 = ptr.next;
+            while (ptr2!=null&&ptr2.val==val){
+                ptr2=ptr2.next;
+            }
+            ptr.next = ptr2;
+        }
+        return dummy.next;
+    }
+}
