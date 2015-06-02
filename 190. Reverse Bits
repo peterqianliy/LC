@@ -1,0 +1,15 @@
+// convert to binary and then reverse --> No, No, directly manipulate the bits: bit shift, bit and, bit or
+ 
+ public class Solution {
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
+       int ans = 0; 
+       int i=0; 
+       while (i<32){
+           ans = (ans<<1) | (n&1); 
+          n>>=1; // not cylic shift -> will result in n=0
+           i++;
+       }
+        return ans;
+    }
+}
