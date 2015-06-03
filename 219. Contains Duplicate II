@@ -1,0 +1,36 @@
+// 1. duplicate elements in a collection, hash table
+// 2. think of cases: when duplicates -> consective duplicates
+
+
+public class Solution {
+    public boolean containsNearbyDuplicate2(int[] nums, int k) {
+        if (nums==null || nums.length==0){
+            return false;
+        }
+        
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer> (); 
+        for (int i=0; i<nums.length; i++){
+            if (map.containsKey (nums[i])){
+                int j = map.get(nums[i]); 
+                if (i-j <= k){
+                    return true;
+                }else {
+                    map.put(nums[i], i);
+                }
+            }else {
+                map.put (nums[i], i);
+            }
+        }
+        return false;
+    }
+    
+    // No matter what the value of nums[i-k-1], discard it; it exceeds the range
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Set<Integer> set = new HashSet<Integer>();
+        for(int i = 0; i < nums.length; i++){
+            if(i > k) set.remove(nums[i-k-1]);
+            if(!set.add(nums[i])) return true;
+        }
+        return false;
+ }
+}
