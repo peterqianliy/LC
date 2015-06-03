@@ -1,0 +1,64 @@
+/**
+ * KNOW step by step operation, considering the all possible cases and manipulating one node at time. 
+ * 
+ * 1. use dummy node
+ * 2. use a new list of the sort list 
+ * 
+ * Failures: 
+ *  #1. Line 50, "<" should be "<="
+ */
+ 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        if (head == null || head.next == null){
+            return head;
+        }
+        
+        ListNode dummy = new ListNode(0);
+        
+        ListNode cur = head; 
+        
+        // Interation through the unsorted list 
+        while (cur!=null){
+            ListNode dummyPre = dummy; 
+            ListNode dummyCur = dummy.next;
+            head = cur.next; 
+            
+            if (dummyCur == null){
+                // append to new list
+                dummyPre.next = cur; 
+                dummyCur = cur; 
+                dummyCur.next = null; 
+            
+            }else {
+                while  (dummyCur!=null && dummyCur.val < cur.val){
+                    dummyCur = dummyCur.next;
+                    dummyPre = dummyPre.next; 
+                }
+                
+                if (dummyCur == null){
+                    // append to new list 
+                    dummyPre.next = cur; 
+                    dummyCur = cur; 
+                    dummyCur.next = null; 
+                }else if (cur.val <= dummyCur.val){
+                    dummyPre.next = cur; 
+                    cur.next = dummyCur; 
+                }
+            }
+        
+        
+        
+            cur = head;
+        }    
+        return dummy.next; 
+    }// end of method
+}// end of class
