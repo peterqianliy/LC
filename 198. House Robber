@@ -1,0 +1,30 @@
+public class Solution {
+    // I have a feeling that it might be wrong -> the feeling is wrong
+    public int rob(int[] nums) {
+        if (nums==null || nums.length==0){
+            return 0;
+        }
+        
+        int[] opt = new int[nums.length+1]; 
+        opt[0] = 0; 
+        opt[1] = nums[0];
+        // only one constraint: no consective items
+        for (int i=2; i<opt.length; i++){
+            opt[i] = Math.max(opt[i-1], opt[i-2] + nums[i-1]); 
+        }
+        return opt[opt.length-1];
+    }
+    
+    // try recursive -> LTE
+    public int rob2(int[] nums){
+        if (nums==null || nums.length==0){
+            return 0; 
+        }else if (nums.length==1){
+            return nums[0];
+        }
+        
+        int[] arr1 = Arrays.copyOfRange(nums, 0, nums.length-1);
+        int[] arr2 = Arrays.copyOfRange(nums, 0, nums.length-2);
+        return Math.max(rob(arr1), rob(arr2) + nums[nums.length-1]);
+    }
+}
