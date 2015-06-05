@@ -1,0 +1,88 @@
+// practice
+// Time limist exceed --- possibly, Infinite loop
+// *Add a HashSet to deal with Duplicates
+// **Skip the duplicate nums[i] - faster? Yes
+public class Solution {
+  
+    // One pass: (dealing with duplicates on the fly)
+    public List<List<Integer>> threeSum(int[] num) {
+      List<List<Integer>> rst = new ArrayList<List<Integer>>();       
+      if(num==null||num.length<3) return rst;
+      
+      int target = 0; 
+      int left, right, res;
+      Arrays.sort(num);
+      
+      for(int i=0; i<num.length-1;i++){
+          left = i+1; 
+          right = num.length-1;
+          if(i!=0){
+              if(num[i]==num[i-1]) continue;
+          }
+          while(left<right){
+ 
+              int sum = num[left]+num[right]+num[i];
+              if(sum==target) {
+                  List<Integer> list = new ArrayList<Integer>();
+                  list.add(num[i]);
+                  list.add(num[left]);
+                  list.add(num[right]);
+                  rst.add(list);
+                  left++;
+                  right--;
+                  //just realized that left-- and right++ at the same time. you can't just l++ or r--.                     //the target remains the same after all.
+                  while(left<right&&num[left]==num[left-1]) left++;
+                  while(left<right&&num[right]==num[right+1]) right--;
+              }else if(sum<target){
+                  left++;
+
+              }else if(sum>target){
+                  right--;
+              }
+          }
+      }
+      return rst; 
+          
+    }
+
+    // Two passes
+    public List<List<Integer>> threeSum2(int[] nums) {
+        List<Integer> list = new ArrayList<Integer> (); 
+        List<List<Integer>> rst = new ArrayList<List<Integer>>(); 
+        if (nums==null || nums.length<=2){
+            return rst;
+        }
+        
+        Arrays.sort(nums);
+        HashSet<List<Integer>> set = new HashSet<List<Integer>>(); 
+        for (int i=0; i<nums.length; i++){
+            if (i!=0 && nums[i-1]==nums[i]){
+                continue;
+            }
+            int start = i+1; 
+            int end = nums.length-1;
+            while (start<end){
+                if (nums[i]+nums[start]+nums[end]>0){
+                    end--; 
+                }else if (nums[i]+nums[start]+nums[end]<0){
+                    start++;
+                }else {
+                    list = new ArrayList<Integer>(); 
+                    list.add(nums[i]);
+                    list.add(nums[start]);
+                    list.add(nums[end]);
+                    // rst.add(list);
+                    set.add (list);
+                    start++; 
+                    end--;
+                }
+            }
+        }
+        
+        for (List<Integer> l: set){
+            rst.add(new ArrayList<Integer>(l));
+        }
+        
+        return rst;
+    }
+}
