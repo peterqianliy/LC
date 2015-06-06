@@ -9,7 +9,7 @@
 //      #4 undefined variable
 //      #5 ATTENTION: where do you UPDATE er ---> er relates to i, start, end (three pointers); changes of any one of these would cause er to change
 public class Solution {
-    public int threeSumClosest(int[] nums, int target) {
+    public int threeSumClosest2(int[] nums, int target) {
         if (nums==null || nums.length==0){
             return 0; // or "-1"
         }else if (nums.length<=3){
@@ -51,4 +51,42 @@ public class Solution {
         }
         return (target - error);
     }
+    
+// A new Update - Major changes
+// practice --> No need to check for duplicates, otherwise, more expensive
+    public int threeSumClosest(int[] nums, int target) {
+        if (nums==null || nums.length<=2){
+            return 0;
+        }
+        
+        Arrays.sort(nums);
+        int error = Integer.MAX_VALUE;
+        // similar to 3Sum
+        for (int i=0; i<nums.length; i++){
+            if (i>0 && nums[i-1]==nums[i]){
+                continue; 
+            }
+            
+            int s = i+1; 
+            int e = nums.length-1; 
+            while (s<e){
+                int er = target-nums[i]-nums[e]-nums[s];
+                error = (Math.abs(er)<Math.abs(error))? er: error;
+
+                if (er == 0){
+                    return target;
+                }else if (er < 0){
+                    e--;
+                    // deal with duplicates..
+                    
+                }else{
+                    s++;
+                    // deal with duplicates..
+                    
+                }
+            }
+        }
+        return target-error;
+    }
+
 }
