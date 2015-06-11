@@ -1,0 +1,43 @@
+/**
+ * 1. Initial: like "revsere an integer"
+ * 2. Failure: 
+ *  #1. wrong answer: 2->0
+ *  #2. wrong answer: signed n (n<0) -> 0
+ *  
+ * whatever the acutal value: you count the number of the '1' in that integer
+ * ">>" the sign remains when you shift the binary value: "100" ----applied ">>"-----> "110"
+ */
+ 
+public class Solution {
+
+    public int hammingWeight(int n) {
+        int sum = 0; 
+        for (int res=n; res!=0; res>>>=1){
+        // for (int res=n; res!=0; res>>=1){
+            sum += res&1; 
+            // res /= 2;
+        }
+        return sum;
+    }
+    
+    public int hammingWeight2(int n){
+        String s = Integer.toBinaryString(n); 
+        int sum = 0; 
+        for (int i=0; i<s.length(); i++){
+            if (s.charAt(i)!='0'){
+                sum ++;
+            }
+        }
+        return sum; 
+    }
+    
+// faster 
+public int hammingWeightOthers(int n) {
+     int c;
+    for (c = 0; n != 0; ++c)
+        n = n & (n - 1);
+    return c;
+}
+    
+    
+}
