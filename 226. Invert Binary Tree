@@ -1,0 +1,31 @@
+// 1. Initial: try recursion. Recursion in this problem: manipulating a substree, rather than a node
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    
+    /**
+     * Invert the tree rooted by the TreeNode root.
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (root==null){
+            // base case 
+            return null; 
+        }
+        
+        // switch left with right
+        TreeNode temp = root.left; 
+        root.left = invertTree (root.right);
+        root.right = invertTree (temp);
+    
+        return root;
+    }
+    
+}
