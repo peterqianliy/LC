@@ -1,0 +1,58 @@
+
+/**
+ * The same problem I did for epic OA
+ */
+public class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> rst = new ArrayList<Integer>();
+        if (matrix == null || matrix.length == 0){
+            return rst;
+        }
+        
+        int m = matrix.length; 
+        int n = matrix[0].length;
+        
+        int col_start = 0; 
+        int col_end = n - 1;
+        int row_start = 0; 
+        int row_end = m - 1; 
+        
+        while (true){
+        
+        // checking for stopping criteria -> similar to DFS
+            if (rst.size() == m * n){
+                return rst; 
+            }
+            for (int i=col_start; i<=col_end; i++){
+                rst.add(matrix[row_start][i]);
+            }
+            row_start++;
+            
+            if (rst.size() == m * n){
+                return rst;
+            }
+            for (int i=row_start; i<=row_end; i++){
+                rst.add(matrix[i][col_end]);
+            }
+            col_end--;
+            
+            if (rst.size() == m * n){
+                return rst;
+            }
+            for (int i=col_end; i>=col_start; i--){
+                rst.add(matrix[row_end][i]);
+            }
+            row_end--;
+            
+            if (rst.size() == m * n){
+                return rst;
+            }
+            for (int i=row_end; i>=row_start; i--){
+                rst.add(matrix[i][col_start]);
+            }
+            col_start++;
+        }
+        
+        //need a return statement?
+    }
+}
