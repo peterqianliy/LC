@@ -1,0 +1,50 @@
+// 1. Initial: the same with "find the Nth element from the end"
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    
+    /**
+     * Input k can be larger than the length of the list.
+     */
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null || k <= 0){
+            return head;
+        }
+        
+        int len = 1; 
+        ListNode slow = head; 
+        ListNode fast = head;
+        while (fast != null && fast.next != null){
+            fast = fast.next; 
+            len++; 
+        }
+        
+        k %= len; 
+        if (k == 0){
+            return head;
+        }
+        
+        fast = head;
+        while (k > 0 && fast != null){
+            fast = fast.next; 
+            --k;
+        }
+        while (fast != null && fast.next != null){
+            fast = fast.next; 
+            slow = slow.next;
+        }
+        fast.next = head;
+        head = slow.next; 
+        slow.next = null; 
+        
+        // return fast;
+        return head;
+    }
+}
