@@ -5,6 +5,8 @@
  * 1. Initial: brute force -> may TLE; Not TLE, but way below avg runtime
  * 2. Binary search
  * 3. Failures: consider at least these three shapes 891234567, 123456789, 345678912
+ * 
+ * Okay, binary search for the pivot point; determine the range and binary search in that range
  */
 public class Solution {
     public int search(int[] nums, int target) {
@@ -23,13 +25,14 @@ public class Solution {
                 start = mid + 1;
             }else {
                 end = mid; 
-                // end = mid - 1?
+                // end = mid - -1?
             }
         }
         
         int rot = start; 
         start = 0; 
         end = nums.length - 1;
+        
         if (rot != 0){
         	if (target >= nums[start]){
         		
@@ -39,7 +42,7 @@ public class Solution {
         		
         	}
         }
-        
+  
         while (start <= end){
             mid = (start + end)/2;
             if (target == nums[mid]){
