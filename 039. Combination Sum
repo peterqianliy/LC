@@ -1,0 +1,68 @@
+/**
+ * Given a set of candidte numbers(C) and a target number(T), find all unique comibinations in C
+ * where the candidate numbers sums to T. Note: the same repeated number may be chosen from C
+ * unlimited number of times. 
+ * 
+ * Note: 
+ * 1. All numbers(including the target) will be positive integers. 
+ * 2. Elements in a conbination must be NON-DESCENDING order. 
+ * 3. The solution set must not contain duplicate combinations. 
+ * 
+ * Example: 
+ * Given a candidate set: 2, 3, 6, 7 and a target integer 7
+ * A solution set is: 
+ * [7], 
+ * [2,2,3]
+ * 
+ * Initial thought: 
+ *  Use backtracking or DFS (QUESTION: any connections between them??)
+ *  Second thought: Coin change problem -> then can use DP 
+ *      Actually, NOT able to do backtracking. try DP
+ *      Wait, NOT able to do DP, either...(well, DP finds optimals, this problem not to find opt)
+ *  Third thought: try dfs. Not able to do this.
+ */
+public class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> rst = new ArrayList<List<Integer>> ();
+        List<Integer> list = new ArrayList<Integer> (); 
+        if (candidates==null || candidates.length==0){
+            return rst; 
+        }
+        
+        Arrays.sort(candidates); //O(n) 
+        for (int i=0; i<candidates.length; i++){
+        // for (int i=candidates.length-1; i>=0; i--){
+            //--^ it should be decresing 
+            dfs (rst, list, candidates, i, candidates[i], target);
+            // dfs(rst, list, candidates, 0, target);
+        }
+        
+        return rst;
+        
+    }
+    
+    public void dfs (List<List<Integer>> rst, List<Integer> list, int[] cands, int start, int cand, int target){
+    // public void dfs (ArrayList<List<Integer>> rst, ArrayList<Integer> list, int[] cands, int cand, int target){
+        // --^ Failure3: compile, List XXX = new ArrayList XXX, but here you can't convert List to ArrayList
+        if (cand > target){
+            return;
+        }else if (cand == target){
+            list.add(cand); 
+            rst.add(new ArrayList<Integer> (list)); 
+            list.remove(list.size()-1);
+            return;
+        }
+        
+        list.add(cand);// --> Failure1: wrong answer. Forgot to add "cand" to list
+                      // --^ Failure2: compile error: <identifier> expected
+        target -= cand;                     
+        for (int i=start; i<cands.length; i++){
+            // i=start + 1, to guarantee non-decreasing 
+            dfs (rst, list, cands, i, cands[i], target);
+            // dfs (rst, list, cands, i, cands[i], target-cands[i]);
+            //--^ Failure: wrong answer; can't subtract cand before adding it into your list
+        }
+        list.remove (list.size()-1);
+        return; 
+    }
+}
