@@ -1,0 +1,53 @@
+/**
+ * Given a sorted integer array without duplicates, return the 
+ * summary of its ranges. 
+ * 
+ * Example: 
+ * 
+ * Given [0,1,2,4,5,7], return ["0->2","4->5", "7"]
+ */
+
+public class Solution {
+    
+    /**
+     * Given null or empty array, return an empty list. Given non-empty array,      * return a list of ranges 
+     * indicated by strings 
+     */
+    public List<String> summaryRanges(int[] nums) {
+        List<String> rst = new ArrayList<String> ();
+        if (nums==null || nums.length==0){
+            return rst; 
+        }
+        
+        int start = nums[0]; 
+        int end = start; 
+        // Can be written recursively
+        for (int i=1; i<nums.length; i++){
+            if (nums[i] == nums[i-1]+1){
+                end = nums[i];
+            }else {
+                rst.add (toString (start, end));
+                start = nums[i];
+                end = start;
+            }
+        }
+        rst.add (toString (start, end)); 
+        
+        return rst; 
+    }
+    
+    /** 
+     * Given two integers and return a string of range
+     * indicated by the two
+     */
+    private String toString(int start, int end){
+        if (start > end){
+            return null; 
+        }else if (start == end){
+            return String.valueOf(start);
+        }
+        
+        String rst = new String("");
+        return rst+String.valueOf(start)+"->"+String.valueOf(end);
+    }
+}
