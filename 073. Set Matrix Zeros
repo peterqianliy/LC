@@ -1,0 +1,80 @@
+public class Solution {
+    public void setZeroes(int[][] arr) {
+        if (arr==null || arr.length==0){
+            return ;
+        }
+        
+		boolean firstRowZero = false;
+		boolean firstColZero = false;
+		
+		for (int i=0; i<arr.length; i++){
+			for (int j=0; j<arr[0].length; j++){
+				
+				// if visiting a 0
+				if (arr[i][j] == 0){
+					// first element 
+					if (i==0 && j==0 ){
+                        firstRowZero = true;
+                        firstColZero = true;
+					}else if (i==0 ){//&& firstRowZero==false){
+						if (!firstRowZero)
+						    firstRowZero = true;
+					}else if (j==0 ){//&& firstColZero==false){
+						if (!firstColZero)
+						    firstColZero = true;
+					}else {
+//						arr[0][j] = (arr[0][j] == 0)? arr[0][j]: 0;
+//						arr[i][0] = (arr[i][0] == 0)? arr[i][0]: 0;
+						arr[0][j] = 0; 
+						arr[i][0] = 0; 
+					}
+				}// end if 
+
+			}	
+		}// end visiting all nodes
+		
+		//Setting zeros
+		// scan rows
+		for (int i=1; i<arr.length; i++){
+        // for (int i=0; i<arr.length; i++){
+			if (arr[i][0] == 0){
+				setRow(arr, i);
+			}
+		}
+	
+		// scan columns
+		for (int j=1; j<arr[0].length; j++){
+//        for (int j=0; j<arr[0].length; j++){
+			if (arr[0][j] == 0){
+				setCol(arr, j);
+			}
+		}
+		
+		
+		System.out.println(firstRowZero);
+		System.out.println(firstColZero);
+		if (firstRowZero){
+			setRow(arr, 0); 		
+		}
+		if (firstColZero){
+			setCol(arr, 0);
+		}
+		
+		return;
+	}
+    
+	private static void setRow(int[][] arr, int row){
+// 		for (int j=1; j<arr[0].length; j++){
+		for (int j=0; j<arr[0].length; j++){
+			arr[row][j] = 0;
+		}
+		return; 
+	}
+
+	private static void setCol(int[][] arr, int col){
+		for (int i=0; i<arr.length; i++){
+			arr[i][col] = 0; 
+		}
+		return;
+	}
+}
