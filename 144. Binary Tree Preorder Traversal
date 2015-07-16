@@ -1,0 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ * 
+ * Give a binary tree, reutrn the preorder traversal of its nodes' values.
+ * 
+ * Initial: by def., use recursion
+ * Try iteration next time. 
+ */
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> rst = new ArrayList<Integer> (); 
+        if (root==null){
+            return rst; 
+        }
+        
+        someMethod(root, rst); 
+        return rst; 
+        
+    }
+    
+    public void someMethod(TreeNode root, List<Integer> list){
+        if (root==null){
+            return; 
+        }
+        
+        list.add (root.val); 
+        someMethod (root.left, list);
+        someMethod (root.right, list);
+        
+        return ;
+    }
+}
