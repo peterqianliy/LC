@@ -1,11 +1,24 @@
 /* 
  Given a non negative integer, num, repeatedly add all its digits until the result has only one digit. 
  Follow up:
- Could you do it without any loop/recursion in O(1) runtime? 
+  Could you do it without any loop/recursion in O(1) runtime? 
+  Refer to the last of this page. 
 */
 
 public class Solution {
-    public int addDigits(int num) {
+    // Use digital root formula for reference
+    public int addDigits1(int num){
+        if (num < 10){
+            return num;
+        }else if (num%9 == 0){
+            return 9; 
+        }else{
+            return num%9;
+        }
+    }
+
+    // Native Implementation
+    public int addDigits2(int num) {
         if (num < 10) return num; 
         int sum = 0;
         
@@ -23,3 +36,12 @@ public class Solution {
         return sum; 
     }
 }
+/* 
+1.Significance and formula of the digit root 
+ It helps to see the digital root of a positive integer as the position it holds with respect to the largest
+ multiple of 9 less than it. 
+ The formula: dr(n) = n - 9 * floor( (n-1)/9 )
+2. Congruence Formula
+ 0 if num is 0; 9 if num is a multiple of 9; otherwise, return num mod 9;
+ */
+ 
