@@ -8,8 +8,11 @@
  * }
  */
  
+ // 01/16 Static virable(Max) may cause wrong answer.
  
 public class Solution {
+
+
      long Max = Long.MAX_VALUE;
     
     //recursive
