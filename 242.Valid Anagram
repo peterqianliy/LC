@@ -1,0 +1,53 @@
+/* Given two strings s and t, write a function to determine if t is an anagram of s. 
+* 01/16 Order doesn't really matter, so just sort. 
+* 01/16 "For" creates a stack level
+*/
+
+public class Solution {
+    // 50ms 
+    public boolean isAnagram2(String s, String t) {
+        if (s == null){
+            return (t == null);
+        }
+        if (s.length() != t.length() ) return false;
+        
+        HashMap<Character, Integer> map = new HashMap<Character, Integer> ();
+        for (int i=0; i<s.length(); i++){
+            char ch = s.charAt(i);
+            if (map.containsKey(ch)){
+                map.put(ch, map.get(ch)+1);
+            }else{
+                map.put(ch, 1);
+            }
+        }
+        for (int i=0; i<t.length(); i++){
+            char ch = t.charAt(i); 
+            if (!map.containsKey(ch)){
+                return false;
+            }else{
+                int num = map.get (ch); 
+                if (num == 1){
+                    map.remove(ch);
+                }else {
+                    map.put (ch, --num);
+                }
+                
+            }
+        }
+        return map.isEmpty(); 
+        
+    }
+    
+    // 7ms 
+    public boolean isAnagram(String s, String t) {
+    char[] schar = s.toCharArray();
+    char[] tchar = t.toCharArray();
+    Arrays.sort(schar);
+    Arrays.sort(tchar);
+
+    String s1 = new String(schar);
+    String s2 = new String(tchar);
+    if(s1.equals(s2)) return true;
+    else return false;
+}
+}
