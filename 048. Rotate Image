@@ -20,7 +20,9 @@ public class Solution {
     public void rotate(int[][] matrix) {
         if (matrix == null){
             return;
-        }      
+        }else if (matrix.length <= 1) {
+            return; 
+        }
         
         int n = matrix.length; 
         
