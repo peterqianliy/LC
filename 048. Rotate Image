@@ -1,0 +1,38 @@
+/* Given an n*n 2D matrix representing an image
+* Rotate the iamge by 90 degrees (clockwise).
+* 
+* Follow up: 
+* Do it in place
+*
+* Thoughts:
+* 1. If in place, the value in temp variable must be used before next iteration.
+*
+* Solution:
+* 1. Generalization (with contrast to Deduction) 
+*    Define matrix as collection square layers. Iterate layer by layer; Within each layer rotate by 90.
+*   
+* History:
+* 10/14 Learnt solution from somewhere else
+* 01/16 Solved it myself after several attempts. 
+*/
+
+public class Solution {
+    public void rotate(int[][] matrix) {
+        if (matrix == null){
+            return;
+        }      
+        
+        int n = matrix.length; 
+        
+        for (int i=0; i<n/2; i++) {
+            for (int j=i; j<n-1-i; j++) {
+                int temp = matrix[i][j];
+                matrix [i][j] = matrix [n-1-j][i]; 
+                matrix [n-1-j][i] = matrix [n-1-i][n-1-j]; 
+                matrix [n-1-i][n-1-j] = matrix [j][n-1-i];
+                matrix [j][n-1-i] = temp ;
+            }
+        }
+        return ;
+    }
+}
