@@ -1,0 +1,36 @@
+/*
+* Given a set of distinct integers, nums, return all possible subsets.
+* 1. Elements in a subset must be in non-descending order.
+* 2. The solution set must not contain duplicate subsets.
+*
+* Solution
+* 1. DFS
+*/
+public class Solution{ 
+    public List<List<Integer>> subsets(int[] num){
+
+        if(num == null|| num.length == 0) return null; 
+                List<List<Integer>> rst = new ArrayList<List<Integer>>(); 
+
+        List<Integer> list = new ArrayList<Integer>(); 
+        int offset = 0; 
+        
+        Arrays.sort(num); 
+        subsetsHelper(rst, list, num, offset); 
+        return rst; 
+        
+    }
+    
+    private void subsetsHelper(List<List<Integer>> rst, 
+    List<Integer> list, int[] num, int offset){
+        rst.add(new ArrayList<Integer>(list)); 
+        
+        
+        for(int i=offset; i<num.length; i++){
+            list.add(num[i]);
+            subsetsHelper(rst,list,num,i+1); 
+            list.remove(list.size()-1); 
+        }
+        
+    }
+}    
