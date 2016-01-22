@@ -8,7 +8,7 @@
 *
 * History:
 * 01/16 DFS 4ms 41.15%
-* 01/16 DFS 3ms 64.30%
+* 01/16 DFS 3ms 64.30% - check if arr[x][y]==1 before/outside function call
 */
 
 public class Solution {
