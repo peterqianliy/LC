@@ -1,0 +1,56 @@
+/* Design a stack that supports push, pop, top, and retrieving the minimu element in constant time. 
+* 
+* Thoughts:
+* 1. Step 1 decide your data structure.(array, list) - ArrayList simply imp
+* 2. Question: retrieve min at CONSTANT time - do you sort? No. Sorting 
+*   increases push and pop time.
+*
+* Solution:
+* 
+* History:
+* 01/16 One list for actual data, other one for min values. 
+*
+*/
+
+class MinStack {
+    
+    public ArrayList<Integer> list = new ArrayList<Integer> (); 
+    public ArrayList<Integer> minList = new ArrayList<Integer> ();
+    
+    public void push (int x) {
+        list.add (x);
+        
+        // Add to min list 
+        if (minList.size()>0) {
+            int min = minList.get (minList.size() -1);//You may use top()  
+            if (min < x) {
+                minList.add (min);     
+            }else {
+                minList.add (x);
+            }
+        }else{
+            minList.add (x);
+        }
+    }
+
+    public void pop () {
+        int length = list.size ();
+        if (length == 0) { 
+            return;
+        }
+        
+        list.remove (length - 1); 
+        minList.remove (length-1); 
+    }
+    
+    //Assusing not empty
+    public int top () {
+        return list.get (list.size() - 1);
+    }
+
+    //Assuming not empty
+    public int getMin() {
+        return minList.get (minList.size() -1); 
+    }
+}
+
