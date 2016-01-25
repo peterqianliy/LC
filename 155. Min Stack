@@ -8,7 +8,7 @@
 * Solution:
 * 
 * History:
-* 01/16 One list for actual data, other one for min values. 
+* 01/16 One list for actual data, other one for min values. 8ms 70%
 *
 */
 
