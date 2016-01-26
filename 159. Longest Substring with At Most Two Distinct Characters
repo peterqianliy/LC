@@ -1,0 +1,57 @@
+// String: repeated characters
+public class Solution {
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        if (s==null || s.length()==0) {
+            return 0; 
+        }else if (s.length() <= 2) {
+            return s.length(); 
+        }
+    
+        // Declare
+        HashMap<Character, Integer> map = new HashMap<Character, Integer> (); 
+        char[] arr = new char[2];
+        int count = 2;
+        
+        // Initialize
+        int idx = 0; 
+        arr[0] = s.charAt(idx++);
+        while (idx<s.length() && s.charAt(idx)==arr[0]) {
+            idx++;
+        }
+        if (idx == s.length()) {
+            return s.length() ; 
+        }
+        arr[1] = s.charAt(idx); 
+        map.put (arr[0], idx); 
+        map.put (arr[1], 1);
+        count = idx + 1; 
+        
+        // Loop
+        for (int i=idx+1; i<s.length(); i++) {
+            char ch = s.charAt(i); 
+            char theDuplicate;
+            boolean hasDuplicate = false; 
+            for (int j=0; j<arr.length; j++) {
+                if (ch == arr[j]) {
+                    hasDuplicate = true;
+                    break;
+                }
+            }
+            if (hasDuplicate) {
+                map.put (ch, map.get(ch)+1); 
+            }else {
+                count = Math.max(count, map.get(arr[0])+map.get(arr[1]));    
+                arr[0] = s.charAt (i-1);
+                arr[1] = ch;
+                int k = i - 1;
+                while ( k>=0 && s.charAt(k)==s.charAt(i-1)) {
+                    k--;
+                }
+                map.put (arr[0], i-k-1);
+                map.put (arr[1], 1);
+            }
+        }
+        count = Math.max(count, map.get(arr[0])+map.get(arr[1]));
+        return count; 
+    }
+}
