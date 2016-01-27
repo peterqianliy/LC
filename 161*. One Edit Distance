@@ -1,10 +1,12 @@
-/* Given two strings S and T, determine if they are both one edit distance apart
+/* Given two strings S and T, determine if they are both one edit distance apart. 
+* (The most difficult part is cases handling)
 *
 * Backgound: https://en.wikipedia.org/wiki/Edit_distance
 * 
 * Solution: 
 * 1. Iterate from start to end or from end to start, and find the different char.
 *   (Used .substring(), .equals() - #function call many)
+* 2. Is there a way to maybe generalize the patterns of these strings?    
 *
 * History: 
 * 01/16 2ms 58% - NEED ENHANCEMENT*
