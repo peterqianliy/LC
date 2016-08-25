@@ -1,0 +1,8 @@
+public class Solution {
+    public String reverseString(String s) {
+        //1. use string builder, loop through s
+        //2. use toCharArray and create String from array
+        
+        //Take 2 for example, pay attention to details: two points and calculate as little as possible
+    }
+}
