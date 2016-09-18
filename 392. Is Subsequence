@@ -1,45 +1,38 @@
-// StackOverFlowError !
+Given a string s and a string t, check if s is subsequence of t.
+You may assume that there is only lower case English letters in both s and t. t is potentially a very long (length ~= 500,000) string, and s is a short string (<=100).
+A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ace" is a subsequence of "abcde" while "aec" is not).
+Example 1:
+s = "abc", t = "ahbgdc"
+Return true.
+Example 2:
+s = "axc", t = "ahbgdc"
+Return false.
+Follow up:
+If there are lots of incoming S, say S1, S2, ... , Sk where k >= 1B, and you want to check one by one to see if T has its subsequence. In this scenario, how would you change your code?
+
 // Note: subsequence DIFFERENT than substring
+// StackOverFlowError !
+
+// Not a classic DP problem 
+
+// TAKEAWAY: indexOf faster than just interating because it can avoid unnecessary looping 
+
 public class Solution {
     public boolean isSubsequence(String s, String t) {
-        if (s==null||s.length()==0) {
-            return true;
-        }
-        
-        if (s.length()==1){
-            return t.indexOf(s.charAt(0)) != -1;
-        }
-        
-        
-        char[] sArr = s.toCharArray(); 
-        char[] tArr = t.toCharArray();
-        int sLen = sArr.length;
-        int tLen = tArr.length;
-        
-        
-        
-        
-        // boolean[] rst = new boolean [sLen+1]; 
-        // rst [0] = true;
-        // rst [1] = t.subString(0, tLen-sLen).indexOf(sArr[1]) > -1;
-        // for (int i=2; i<sLen+1; i++){
-        //     rst[i] = rst[i-1] &&  
-        // }
-        
-        // boolean[] rst = new boolean[s.length()+1];
-        // rst [0] = true;
-        // int lastIdx = t.subString(0, tLen-sLen+1).indexOf(sArr[1]);
-        // rst [1] = lastIdx != -1; 
-        // if (!rst[1]) return false;
-        // for (int i=2; i<s.length()+1; i++){
-        //     if( t.subString(0, tLen-sLen+i).lastIndexOf(sArr[i]))
-        // }
-        
-        return (isSubsequence(s.substring(0,sLen), t.substring(0,tLen))&&(s.charAt(sLen-1)==t.charAt(tLen-1))) || isSubsequence(s, t.substring(0,tLen));
-        
-        
-        
-        
+        if (s==null||s.length()==0) return true; 
+       else if (t==null||t.length()==0) return false; 
+       
+       int tIdx = -1,sIdx =0; 
+       int length = t.length() ;
+       char[] sArr = s.toCharArray();
+       while (tIdx < length && sIdx<sArr.length){
+           //tIdx = t.indexOf(sArr[sIdx++], tIdx); // wrong; see "lee" and "lyyyeyyyy"
+           tIdx = t.indexOf(sArr[sIdx++], tIdx+1);
+           if (tIdx==-1)return false;
+           
+       }
+       return true;
+          
         
     }
     
