@@ -15,7 +15,7 @@ If there are lots of incoming S, say S1, S2, ... , Sk where k >= 1B, and you wan
 
 // Not a classic DP problem 
 
-// TAKEAWAY: indexOf faster than just interating because it can avoid unnecessary looping 
+// TAKEAWAY: indexOf faster than just interating because it can avoid unnecessary looping ?
 
 public class Solution {
     public boolean isSubsequence(String s, String t) {
