@@ -1,6 +1,6 @@
 // subproblem: count #bits for each number - duan chu fa 
 // find relation between numbers
-// (TODO): need to generalize - putting 0,1 cases inside the loop not readable
+// (TODO: need to generalize) - putting 0,1 cases inside the loop not readable
 public class Solution {
     public int[] countBits(int num) {
         if (num==0) return new int[]{0};
