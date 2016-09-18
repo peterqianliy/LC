@@ -1,0 +1,46 @@
+// StackOverFlowError !
+// Note: subsequence DIFFERENT than substring
+public class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if (s==null||s.length()==0) {
+            return true;
+        }
+        
+        if (s.length()==1){
+            return t.indexOf(s.charAt(0)) != -1;
+        }
+        
+        
+        char[] sArr = s.toCharArray(); 
+        char[] tArr = t.toCharArray();
+        int sLen = sArr.length;
+        int tLen = tArr.length;
+        
+        
+        
+        
+        // boolean[] rst = new boolean [sLen+1]; 
+        // rst [0] = true;
+        // rst [1] = t.subString(0, tLen-sLen).indexOf(sArr[1]) > -1;
+        // for (int i=2; i<sLen+1; i++){
+        //     rst[i] = rst[i-1] &&  
+        // }
+        
+        // boolean[] rst = new boolean[s.length()+1];
+        // rst [0] = true;
+        // int lastIdx = t.subString(0, tLen-sLen+1).indexOf(sArr[1]);
+        // rst [1] = lastIdx != -1; 
+        // if (!rst[1]) return false;
+        // for (int i=2; i<s.length()+1; i++){
+        //     if( t.subString(0, tLen-sLen+i).lastIndexOf(sArr[i]))
+        // }
+        
+        return (isSubsequence(s.substring(0,sLen), t.substring(0,tLen))&&(s.charAt(sLen-1)==t.charAt(tLen-1))) || isSubsequence(s, t.substring(0,tLen));
+        
+        
+        
+        
+        
+    }
+    
+}
