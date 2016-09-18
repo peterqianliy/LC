@@ -1,0 +1,17 @@
+// subproblem: count #bits for each number - duan chu fa 
+// find relation between numbers
+// (TODO): need to generalize - putting 0,1 cases inside the loop not readable
+public class Solution {
+    public int[] countBits(int num) {
+        if (num==0) return new int[]{0};
+        int[] arr = new int[num+1];
+        
+        arr[0]=0; // 0 has 0
+        arr[1]=1; // 1 has 1
+        for (int i=2; i<=num; i++){
+            //arr[i]=arr[i/2] + i%2;
+            arr[i]=arr[i>>1]+(i&1);
+        }
+        return arr; 
+    }
+}
