@@ -1,0 +1,33 @@
+/**
+ * 1. update profit
+ * 2. update the best buy price
+ * TAKEAWAY: profit for ONE transaction - lowest buy price and highest sell price
+ * QUESTION: how is it a DP problem??
+ */
+public class Solution{
+    public int maxProfit(int[] prices) {
+        if (prices==null || prices.length==0){
+            return 0; 
+        }
+        
+        int buyPrice = prices[0];
+        //int profit = Integer.MIN_VALUE; // what if not MIN value
+        int profit = 0; // at least 0
+        for (int i=1; i<prices.length; i++){
+            int cur = prices[i];
+            
+            
+            if (buyPrice<cur){
+                profit=Math.max(cur - buyPrice,profit) ;     
+                
+            }else {
+                buyPrice=cur;
+            }
+            
+            
+        }
+        return profit; 
+        
+    }
+}
+
