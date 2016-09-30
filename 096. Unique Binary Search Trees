@@ -1,0 +1,26 @@
+Problem: given a number, find all the unique binary search trees containing numbers from 1 to n
+
+Thinking: 
+1. dynamic programming -> subproblems should overlap, subsubsolutions should contribute to subsolutions. 
+okay, what's relation between dp[n] and dp[n-1]?? 
+the trees in dp[n-1] can be reused in dp[n]?? 
+---cannot find the relations
+2. what's relation between this binary search tree and some preorder array??
+3. try brute force? wait, given a number, how do you even create those trees??
+
+
+Checking Discussion: 
+1. https://discuss.leetcode.com/topic/8398/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i/2
+"the problem space" is different. 
+For array DPs, subproblems are differentiated drom each other by 1....n-i, i...n-i+1
+Here, n-1 problem and n-2 subproblem are not just different because of the last nubmer 
+MAJOR TAKEAWAY: 
+1) Creating a BST from a sequence of numbers: pick an intermediate number and then
+constructing left and right subtrees 
+2) dp[{1,2,3,4}] equals dp[{5,6,7,8}]
+2. (Similar to 1)essentially, we need to build a tree. First, pick a root node.Then how many possible sub trees
+can be held under that node. 
+
+
+Running Results: 
+1. need to improve performance. possible issue with two loops 
