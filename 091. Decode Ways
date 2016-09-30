@@ -1,0 +1,24 @@
+encoded: letters to numbers
+Find the number of the solutions  
+Decode the message - one solution is one decoded message 
+
+The data structure in problem: array 
+first thought: what's relation between DecWay[L] and DecWay[L-1]
+dp[i] = dp[i-1] + dp[i-2]*dp[2]
+1) Letter i translated alone:  dp[i] = dp[i-1]
+2) Letter i with Letter i-1 : dp[i] = dp[i-2]*dp[2]
+.... (Big flaw in this thought: the new letter can only be with the ADJACENT one)
+
+I'm separating the new element in the array from the old array.
+
+looking at Discussion 
+1. leading zeros - corner cases, special cases - invalid? 
+2. solution one: DIVIDE the string into 1...n-1, n or 1...n-2, n-1...n. 
+he gives explanations on why only n-1..n can be valid instead of n-i...n. 
+- for strings/arrays ---- this can be my first dividing technique
+okay, when looking at the issue, DIVIDE it into subproblems 
+3. O(1) space - two variables are enough. Think about the above, dp[i] will only depend on dp[i-1] or dp[i-2]
+4. specially for this problem, can start from the end since sany string with leading zeros cannot be 
+decoded 
+5. this post should be useful https://discuss.leetcode.com/topic/2562/dp-solution-java-for-reference/29
+I did not finish all the comments 
